@@ -1,0 +1,12 @@
+<h1>Equipes</h1>
+
+
+<%= link_to "Cadastrar equipe", new_equipe_path %>
+
+<div id="equipes">
+    <% @equipes.each do|equipe| %>
+        <div>
+            <%=link_to equipe.nome, equipe%>
+        </div>
+    <% end %>
+</div>
