@@ -6,7 +6,9 @@ class EquipesController < ApplicationController
 
   def show
     @equipe = Equipe.find(params[:id])
+    @guardas = Guarda.where(equipe_id: @equipe.id)
   end
+
   def new
     @equipe = Equipe.new
   end
@@ -14,7 +16,7 @@ class EquipesController < ApplicationController
   def create
     @equipe = Equipe.new(equipe_params)
     if @equipe.save
-      redirect_to @equipe
+      redirect_to equipes_path, notice: "Equipe registrada com sucesso !"
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,15 +29,18 @@ class EquipesController < ApplicationController
   def update
     @equipe = Equipe.find(params[:id])
     if @equipe.update(equipe_params)
-      redirect_to @equipe
+      redirect_to @equipe, notice: "Equipe atualizada com sucesso !"
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @equipe.destroy
-    redirect_to equipes_path
+    if @equipe.destroy
+      redirect_to equipes_path, notice: "Equipe deletada com sucesso !"
+    else
+      redirect_to @equipe, alert: @equipe.errors.full_messages.to_sentence
+    end
   end
 
   private
@@ -44,6 +49,6 @@ class EquipesController < ApplicationController
     end
 
     def equipe_params
-      params.expect(equipe: [ :nome ])
+      params.require(:equipe).permit(:nome)
     end
 end

@@ -1,5 +1,34 @@
 <h1><%= @equipe.nome %></h1>
 
+<% if flash[:alert]%>
+    <div class="error">
+        <%= flash[:alert]%>
+    </div>
+<% end%>
+
+<h2>Guardas da <%= @equipe.nome%></h2>
+<table>
+  <thead>
+    <tr>
+      
+      <th>Nome</th>
+      <th>Matrícula</th>
+      <th>Porte de Arma</th>
+      <th>Equipe</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @guardas.each do |guarda| %>
+      <tr>
+        <td><%= guarda.nome %></td>
+        <td><%= guarda.matricula %></td>
+        <td><%= guarda.porte_arma %></td>
+        <td><%= guarda.equipe.nome if guarda.equipe %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <div style="display: flex; flex-direction:column; gap:15px;">
 <%= link_to "Voltar", equipes_path%>
 <%= link_to "Editar", edit_equipe_path(@equipe) %>
