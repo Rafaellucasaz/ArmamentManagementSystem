@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_04_230538) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_06_015744) do
   create_table "armas", force: :cascade do |t|
     t.string "modelo", null: false
     t.string "registro", null: false
@@ -39,8 +39,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_04_230538) do
   end
 
   create_table "movimentacaos", force: :cascade do |t|
-    t.string "armeiro", null: false
-    t.string "matricula_armeiro", null: false
     t.date "data", null: false
     t.time "hora", null: false
     t.boolean "tipo", null: false
@@ -51,7 +49,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_04_230538) do
     t.integer "guarda_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "armeiro_id", null: false
     t.index ["arma_id"], name: "index_movimentacaos_on_arma_id"
+    t.index ["armeiro_id"], name: "index_movimentacaos_on_armeiro_id"
     t.index ["guarda_id"], name: "index_movimentacaos_on_guarda_id"
   end
 
@@ -65,4 +65,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_04_230538) do
   add_foreign_key "guardas", "equipes"
   add_foreign_key "movimentacaos", "armas"
   add_foreign_key "movimentacaos", "guardas"
+  add_foreign_key "movimentacaos", "guardas", column: "armeiro_id"
 end
