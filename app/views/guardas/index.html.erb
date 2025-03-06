@@ -1,0 +1,12 @@
+<h1>Guardas</h1>
+
+
+<%= link_to "Cadastrar guarda", new_guarda_path %>
+
+<div id="guardas">
+    <% @guardas.each do|guarda| %>
+        <div>
+            <%=link_to guarda.nome, guarda%>
+        </div>
+    <% end %>
+</div>

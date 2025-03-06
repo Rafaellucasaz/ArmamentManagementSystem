@@ -1,0 +1,43 @@
+<%= form_with model: @guarda do |form| %>
+  <div class="form">
+    <div class="form-field">
+        <%= form.label :nome %>
+        <%= form.text_field :nome %>
+        <%if @guarda.errors[:nome].any?%>
+            <div>
+                <%= @guarda.errors[:nome].join(", ") %>
+            </div>
+        <% end %>
+    </div>
+
+    <div class="form-field">
+        <%= form.label :matricula, "Matrícula" %>
+        <%= form.text_field :matricula %>
+        <%if @guarda.errors[:matricula].any?%>
+            <div>
+                <%= @guarda.errors[:matricula].join(", ") %>
+            </div>
+        <% end %>
+    </div>
+
+    <div class="form-field">
+        <%= form.label :porte_arma,"Nº do porte de arma" %>
+        <%= form.text_field :porte_arma %>
+        <%if @guarda.errors[:porte_arma].any?%>
+            <div>
+                <%= @guarda.errors[:porte_arma].join(", ") %>
+            </div>
+        <% end %>
+    </div>
+
+    <div class="form-field">
+        <%= form.label :equipe_id, "Equipe" %>
+        <%= form.collection_select :equipe_id, @equipes, :id, :nome, prompt: "Selecione uma equipe" %>
+    </div>
+    
+  </div>
+
+  <div>
+    <%= form.submit 'Salvar guarda'%>
+  </div>
+<% end %>
