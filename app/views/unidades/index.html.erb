@@ -1,0 +1,12 @@
+<h1>Unidade</h1>
+
+
+<%= link_to "Cadastrar unidade", new_unidade_path %>
+
+<div id="unidades">
+    <% @unidades.each do|unidade| %>
+        <div>
+            <%=link_to unidade.nome, unidade%>
+        </div>
+    <% end %>
+</div>

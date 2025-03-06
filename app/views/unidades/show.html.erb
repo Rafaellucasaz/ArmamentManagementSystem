@@ -1,0 +1,8 @@
+<h1><%= @unidade.nome %></h1>
+
+<div style="display: flex; flex-direction:column; gap:15px;">
+<%= link_to "Voltar", unidades_path%>
+<%= link_to "Editar", edit_unidade_path(@unidade) %>
+<%= button_to "Deletar", @unidade, method: :delete, data: { turbo_confirm: "tem certeza?" } %>
+
+</div>
