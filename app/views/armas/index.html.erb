@@ -1,0 +1,12 @@
+<h>Armas</h1>
+
+
+<%= link_to "Cadastrar arma", new_arma_path %>
+
+<div id="armas">
+    <% @armas.each do|arma| %>
+        <div>
+            <%=link_to arma.modelo, arma%>
+        </div>
+    <% end %>
+</div>

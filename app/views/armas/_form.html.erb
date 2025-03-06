@@ -1,0 +1,28 @@
+<%= form_with model: @arma do |form| %>
+  <div class="form">
+    <div class="form-field">
+        <%= form.label :modelo %>
+        <%= form.text_field :modelo %>
+        <%if @arma.errors[:modelo].any?%>
+            <div>
+                <%= @arma.errors[:modelo].join(", ") %>
+            </div>
+        <% end %>
+    </div>
+
+    <div class="form-field">
+        <%= form.label :registro%>
+        <%= form.text_field :registro %>
+        <%if @arma.errors[:registro].any?%>
+            <div>
+                <%= @arma.errors[:registro].join(", ") %>
+            </div>
+        <% end %>
+    </div>
+    
+  </div>
+
+  <div>
+    <%= form.submit 'Salvar arma'%>
+  </div>
+<% end %>
