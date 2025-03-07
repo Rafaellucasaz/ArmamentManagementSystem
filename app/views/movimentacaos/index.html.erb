@@ -1,0 +1,55 @@
+<h1>Movimentacões</h1>
+
+
+<%= link_to "Cadastrar Empréstimo", emprestimo_movimentacaos_path %>
+<%= link_to "Cadastrar Devolução", devolucao_movimentacaos_path %>
+
+<div id="movimentacoes">
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>Armeiro</th>
+                    <th>Nº Mat. do armeiro</th>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>tipo</th>
+                    <th>modelo da arma</th>
+                    <th>Registro da arma</th>
+                    <th>balas</th>
+                    <th>calibre</th>
+                    <th>carregadores</th>
+                    <th>Guarda</th>
+                    <th>Nº de porte de arma</th>
+                    <th>Nº Mat. do guarda</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @movimentacoes.each do|movimentacao| %>
+                    <tr>
+                        <td><%= movimentacao.armeiro.nome %></td>
+                        <td><%= movimentacao.armeiro.matricula %></td>
+                        <td><%= movimentacao.data.strftime("%d/%m/%Y")%></td>
+                        <td><%= movimentacao.hora.strftime("%H:%M")%></td>
+                        <td> 
+                            <% if movimentacao.tipo %>
+                                Empréstimo
+                            <% else %>
+                                Devolução
+                            <% end %>
+                        </td>
+                        <td><%= movimentacao.arma.modelo %></td>
+                        <td><%= movimentacao.arma.registro %></td>
+                        <td><%= movimentacao.balas %></td>
+                        <td><%= movimentacao.calibre %></td>
+                        <td><%= movimentacao.carregadores %></td>
+                        <td><%= movimentacao.guarda.nome %></td>
+                        <td><%= movimentacao.guarda.porte_arma %></td>
+                        <td><%= movimentacao.guarda.matricula %></td>
+                    </tr>
+                    
+                <% end %>
+            </tbody>
+        </table>
+
+</div>

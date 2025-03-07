@@ -3,36 +3,25 @@
     <div class="form-field">
         <%= form.label :nome %>
         <%= form.text_field :nome %>
-        <%if @guarda.errors[:nome].any?%>
-            <div>
-                <%= @guarda.errors[:nome].join(", ") %>
-            </div>
-        <% end %>
+        <%= show_errors(@guarda,:nome) %>
     </div>
 
     <div class="form-field">
         <%= form.label :matricula, "Matrícula" %>
         <%= form.text_field :matricula %>
-        <%if @guarda.errors[:matricula].any?%>
-            <div>
-                <%= @guarda.errors[:matricula].join(", ") %>
-            </div>
-        <% end %>
+        <%= show_errors(@guarda,:matricula) %>
     </div>
 
     <div class="form-field">
         <%= form.label :porte_arma,"Nº do porte de arma" %>
         <%= form.text_field :porte_arma %>
-        <%if @guarda.errors[:porte_arma].any?%>
-            <div>
-                <%= @guarda.errors[:porte_arma].join(", ") %>
-            </div>
-        <% end %>
+        <%= show_errors(@guarda,:porte_arma) %>
     </div>
 
     <div class="form-field">
         <%= form.label :equipe_id, "Equipe" %>
         <%= form.collection_select :equipe_id, @equipes, :id, :nome, prompt: "Selecione uma equipe" %>
+        <%= show_errors(@guarda,:equipe_id) %>
     </div>
     
   </div>

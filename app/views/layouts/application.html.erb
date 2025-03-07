@@ -23,6 +23,30 @@
   </head>
 
   <body>
+    <nav>
+  <ul style="display: flex; flex-direction:row; gap:20px">
+    <% if user_signed_in? %>
+      <li><%= link_to 'Movimentações', movimentacaos_path %></li>
+      <li><%= link_to 'Guardas', guardas_path %></li>
+      <li><%= link_to 'Armas', armas_path %></li>
+      <li><%= link_to 'Equipes', equipes_path %></li>
+      <li><%= link_to 'Unidades', unidades_path %></li>
+      <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+    <% end %>
+  </ul>
+</nav>
+
+    <% if flash[:notice] %>
+      <div class="notice">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="alert">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

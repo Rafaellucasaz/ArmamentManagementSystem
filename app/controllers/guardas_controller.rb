@@ -20,6 +20,7 @@ class GuardasController < ApplicationController
     if @guarda.save
       redirect_to guardas_path, notice: "Guarda registrado com sucesso !"
     else
+      @equipes = Equipe.all
       render :new, status: :unprocessable_entity
     end
   end

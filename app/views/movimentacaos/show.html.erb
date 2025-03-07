@@ -1,0 +1,72 @@
+<h1>Movimentação Nº <%= @movimentacao.id %></h1>
+
+<div>
+    <div style="display:flex; flex-direction:row; gap:10px">
+        <p>Armeiro:</p>
+        <p><%=@armeiro.nome%></p>
+    </div>
+    <div style="display:flex; flex-direction:row; gap:10px">
+        <p>Nº Mat. do Armeiro</p>
+        <p><%=@armeiro.matricula%></p>
+    </div>
+    <div style="display:flex; flex-direction:row; gap:10px">
+        <p>Data:</p>
+        <p><%=@movimentacao.data%></p>
+    </div>
+     <div style="display:flex; flex-direction:row; gap:10px">
+        <p>Hora:</p>
+        <p><%=@movimentacao.hora%></p>
+    </div>
+     <div style="display:flex; flex-direction:row; gap:10px">
+        <p>Tipo:</p>
+        <p>
+            <% if movimentacao.tipo %>
+            Empréstimo
+            <% else %>
+                Devolução
+            <% end %>
+        </p>
+    </div>
+    <div style="display:flex; flex-direction:row; gap:10px">
+        <p>Modelo da arma:</p>
+        <p><%=@arma.modelo%></p>
+    </div>
+    <div style="display:flex; flex-direction:row; gap:10px">
+        <p>Registro da arma:</p>
+        <p><%=@arma.registro%></p>
+    </div>
+    <div style="display:flex; flex-direction:row; gap:10px">
+        <p>Quantidade de balas:</p>
+        <p><%=@movimentacao.balas%></p>
+    </div>
+    <div style="display:flex; flex-direction:row; gap:10px">
+        <p>Calibre:</p>
+        <p><%=@movimentacao.calibre%></p>
+    </div>
+    <div style="display:flex; flex-direction:row; gap:10px">
+        <p>Carregadores:</p>
+        <p><%=@movimentacao.carregadores%></p>
+    </div>
+    <div style="display:flex; flex-direction:row; gap:10px">
+        <p>Guarda:</p>
+        <p><%=@guarda.nome%></p>
+    </div>
+    <div style="display:flex; flex-direction:row; gap:10px">
+        <p>Nº de porte de arma:</p>
+        <p><%=@guarda.porte_arma%></p>
+    </div>
+    <div style="display:flex; flex-direction:row; gap:10px">
+        <p>Nº Mat. do guarda:</p>
+        <p><%=@guarda.matricula%></p>
+    </div>
+    <div style="display:flex; flex-direction:row; gap:10px">
+        <p>Observações/justificativa:</p>
+        <p><%=@movimentacao.observacao%></p>
+    </div>
+</div>
+
+<div style="display: flex; flex-direction:column; gap:15px;">
+<%= link_to "Voltar", movimentacaos_path%>
+<%= button_to "Deletar", @movimentacao, method: :delete, data: { turbo_confirm: "tem certeza?" } %>
+
+</div>

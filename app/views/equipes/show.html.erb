@@ -1,16 +1,11 @@
 <h1><%= @equipe.nome %></h1>
 
-<% if flash[:alert]%>
-    <div class="error">
-        <%= flash[:alert]%>
-    </div>
-<% end%>
+
 
 <h2>Guardas da <%= @equipe.nome%></h2>
 <table>
   <thead>
     <tr>
-      
       <th>Nome</th>
       <th>Matrícula</th>
       <th>Porte de Arma</th>

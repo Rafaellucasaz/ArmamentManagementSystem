@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: { registrations: "users/registrations" }
+
+
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   resources :equipes
@@ -9,7 +15,14 @@ Rails.application.routes.draw do
 
   resources :armas
 
-  resources :movimentacaos
+  resources :movimentacaos, except: [ :new, :create ] do
+    collection do
+      get :emprestimo
+      get :devolucao
+      post :create_emprestimo
+      post :create_devolucao
+    end
+  end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_06_015744) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_07_022310) do
   create_table "armas", force: :cascade do |t|
     t.string "modelo", null: false
     t.string "registro", null: false
@@ -50,6 +50,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_06_015744) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "armeiro_id", null: false
+    t.text "observacao"
     t.index ["arma_id"], name: "index_movimentacaos_on_arma_id"
     t.index ["armeiro_id"], name: "index_movimentacaos_on_armeiro_id"
     t.index ["guarda_id"], name: "index_movimentacaos_on_guarda_id"
@@ -60,6 +61,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_06_015744) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["nome"], name: "index_unidades_on_nome", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.boolean "first_login"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "guardas", "equipes"
