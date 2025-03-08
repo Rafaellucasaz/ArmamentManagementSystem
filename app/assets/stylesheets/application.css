@@ -1,10 +1,265 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+body {
+    height: 100vh;
+}
+
+h1{
+    margin-top: 200px;
+    font-size: 50px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.nav {
+    display: flex; 
+    flex-direction:row; 
+    gap:20px;
+    background-color: #0077B6;
+    height: 10%;
+    border-radius: 7px;
+    justify-items:center;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 50%;
+    position: fixed;
+    left: 25%;
+    top: 1%;
+    padding: 5px;
+    z-index: 1;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+    height: 75%;
+    width: 15%;
+    font-size: 18px;
+}
+
+.nav-item:hover{
+    background-color: #ADE8F4;
+}
+
+.notice {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    text-wrap:wrap;
+    word-break: break-all;
+    top: 15%;
+    left: 40%;
+    width: 20%;
+    height: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    background-color: #ADE8F4;
+    color: black;
+    z-index: 2;
+}
+
+.data {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); 
+    align-items: center;
+    width: 80%; 
+    background-color: grey;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    padding: 0px 10px 10px 10px;
+    background-color: #0096C7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.list{
+    display: flex;
+    flex-direction: column;
+    grid-column: span 2;
+    
+}
+
+.list-item {
+    text-align: center;
+    border-collapse: collapse;
+    overflow: hidden;
+    padding: 2px;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+.list-item:hover{
+    background-color: #ADE8F4;
+    cursor: pointer;
+}
+
+.list-item:last-child{
+    border: none;
+}
+
+
+.list-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: space-around;
+   
+    border-bottom: 2px solid black;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.btn-list{
+    width: 45%;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin: 5px 0px;
+}
+
+.btn-list:hover{
+    background-color: #ADE8F4;
+    border-color: #ADE8F4;
+}
+
+
+
+.btn-action{
+    width: 32%;
+    text-align: center;
+    padding: 5px;
+    background-color: #ADE8F4;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.btn-action:hover{
+    background-color: #0096C7;
+}
+
+.options{
+    height: 10%;
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.search-box{
+    width: 38%;
+    border: #ddd solid 1px;
+    border-radius: 2px;
+}
+
+.empty{
+    grid-column: span 12;
+}
+
+table{
+    background-color: #0077B6;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+th{
+    text-align: center;
+    background-color: #0096c7;
+    font-size: 26px;
+}
+
+td{
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 2px;
+    font-size: 18px;
+   
+}
+
+.armas-table {
+    width: 50%;
+    
+}
+.guardas-table {
+    width: 80%;
+    
+}
+.t-head{
+    background-color: #0096C7;
+}
+
+.table-buttons{
+
+}
+#guarda-nome {
+    width: 40%;
+}
+
+#guarda-mat {
+    width: 15%;
+    height: 10%;
+}
+
+#guarda-porte{
+    width: 20%;
+}
+
+#guarda-equipe{
+    width: 15%;
+}
+
+.mov-table {
+    width: 95%;
+}
+
+.mov-table th {
+    font-size: 24px;
+}
+
+.mov-table td {
+    font-size: 16px;
+}
+
+.mov-table-data {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.mov-table-data div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.mov-table-table{
+    width: 100%;;
+}
+
+.mov-table-table th {
+    font-size: 20px;
+}
+
+
+
+
+
+

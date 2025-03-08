@@ -1,12 +1,27 @@
 <h1>Equipes</h1>
 
 
-<%= link_to "Cadastrar equipe", new_equipe_path %>
+<div class="options">
+    <input type="text" name="" id="" placeholder="buscar" class="search-box">
+    <%= link_to "Cadastrar equipe", new_equipe_path, class: "btn-action"%>
+</div>
 
-<div id="equipes">
+
+<div class="data">
+     <% if @equipes.empty? %>
+       
+    <h2 class="empty">Nenhuma equipe cadastrada</h2>
+        
+    <% end %>
     <% @equipes.each do|equipe| %>
-        <div>
-            <%=link_to equipe.nome, equipe%>
+        <div class="list">
+            <%=link_to equipe.nome, equipe, class: "list-item"%>
+            <div class="list-buttons">
+                <%= link_to "Editar", edit_equipe_path(equipe), class: "btn-list"%>
+                <%= link_to "Deletar", equipe, data: { turbo_method: "delete", turbo_confirm: "Tem certeza?" },  class: "btn-list"%>
+                
+            </div>
+            
         </div>
     <% end %>
 </div>

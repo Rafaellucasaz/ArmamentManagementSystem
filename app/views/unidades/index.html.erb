@@ -1,12 +1,23 @@
-<h1>Unidade</h1>
+<h1>Unidades</h1>
 
+<div class="options">
+    <input type="text" name="" id="" placeholder="Buscar" class="search-box">
+    <%= link_to "Cadastrar unidade", new_unidade_path, class: "btn-action" %>
+</div>
 
-<%= link_to "Cadastrar unidade", new_unidade_path %>
-
-<div id="unidades">
-    <% @unidades.each do|unidade| %>
-        <div>
-            <%=link_to unidade.nome, unidade%>
+<div class="data">
+    <% if @unidades.empty? %>
+       
+    <h2 class="empty">Nenhuma unidade cadastrada</h2>
+        
+    <% end %>
+    <% @unidades.each do |unidade| %>
+        <div class="list">
+            <%= link_to unidade.nome, unidade, class: "list-item" %>
+            <div class="list-buttons">
+                <%= link_to "Editar", edit_unidade_path(unidade), class: "btn-list" %>
+                <%= link_to "Deletar", unidade, data: { turbo_method: "delete", turbo_confirm: "Tem certeza?" }, class: "btn-list" %>
+            </div>
         </div>
     <% end %>
 </div>

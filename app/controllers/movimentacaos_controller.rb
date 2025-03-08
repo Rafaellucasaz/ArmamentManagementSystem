@@ -42,24 +42,29 @@ class MovimentacaosController < ApplicationController
     @movimentacao = Movimentacao.new(movimentacao_params)
 
     if @movimentacao.valid?
-      # checar se houve alterações na quantidade de balas
+      # Buscar o último empréstimo da arma
       @emprestimo = Movimentacao.where(arma_id: @movimentacao.arma_id).order(data: :desc, hora: :desc).first
-
-      if @emprestimo.balas != @movimentacao.balas && @movimentacao.observacao.nil?
-        Rails.logger.debug "Erro: Quantidade de balas não corresponde ao empréstimo"
+      # Verificar se quantidade balas mudou
+      if @emprestimo.balas != @movimentacao.balas && @movimentacao.observacao.blank?
         set_armas_guardas(false)
         flash.now[:alert] = "A quantidade de balas devolvidas não corresponde ao empréstimo. Justifique na observação."
-        render :devolucao, status: :unprocessable_entity
-      else
-        @movimentacao.save
-        update_arma_status(@movimentacao.arma_id)
-
-        redirect_to movimentacaos_path, notice: "Devolução registrada com sucesso !"
+        return render :devolucao, status: :unprocessable_entity
       end
-    else
-      set_armas_guardas(false)
-      render :devolucao, status: :unprocessable_entity
+      # Verificar se arma está sendo devolvida por quem a pegou emprestada
+      if @emprestimo.guarda_id != @movimentacao.guarda_id
+        set_armas_guardas(false)
+        flash.now[:alert] = "A devolução da arma só pode ser feita pelo guarda que a recebeu emprestada."
+        return render :devolucao, status: :unprocessable_entity
+      end
+
+      @movimentacao.save
+      update_arma_status(@movimentacao.arma_id)
+
+      return redirect_to movimentacaos_path, notice: "Devolução registrada com sucesso!"
     end
+
+    set_armas_guardas(false)
+    render :devolucao, status: :unprocessable_entity
   end
 
   def edit

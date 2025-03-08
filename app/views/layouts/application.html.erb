@@ -20,33 +20,39 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_import_module_tag "flash_messages" %>
+
   </head>
 
   <body>
-    <nav>
-  <ul style="display: flex; flex-direction:row; gap:20px">
     <% if user_signed_in? %>
-      <li><%= link_to 'Movimentações', movimentacaos_path %></li>
-      <li><%= link_to 'Guardas', guardas_path %></li>
-      <li><%= link_to 'Armas', armas_path %></li>
-      <li><%= link_to 'Equipes', equipes_path %></li>
-      <li><%= link_to 'Unidades', unidades_path %></li>
-      <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
-    <% end %>
-  </ul>
-</nav>
+    <div class= "nav">
+      <%= link_to 'Movimentações', movimentacaos_path, class: "nav-item"%>
+      <%= link_to 'Guardas', guardas_path, class: "nav-item" %>
+      <%= link_to 'Armas', armas_path, class: "nav-item" %>
+      <%= link_to 'Equipes', equipes_path, class: "nav-item"%>
+      <%= link_to 'Unidades', unidades_path, class: "nav-item" %>
+      <%= link_to 'Logout', destroy_user_session_path, data: {turbo_method: "delete"} , class: "nav-item"%>
+    </div>
+  <% end %>
+
+
+  
 
     <% if flash[:notice] %>
-      <div class="notice">
+      <div id="notice" class="notice">
         <%= flash[:notice] %>
       </div>
     <% end %>
 
     <% if flash[:alert] %>
-      <div class="alert">
+      <div id="alert" class="alert">
         <%= flash[:alert] %>
       </div>
     <% end %>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
+   
   </body>
 </html>

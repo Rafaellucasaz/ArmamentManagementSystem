@@ -1,12 +1,33 @@
 <h1>Guardas</h1>
 
 
-<%= link_to "Cadastrar guarda", new_guarda_path %>
 
-<div id="guardas">
-    <% @guardas.each do|guarda| %>
-        <div>
-            <%=link_to guarda.nome, guarda%>
-        </div>
-    <% end %>
+<div class="options">
+    <input type="text" name="" id="" placeholder="buscar" class="search-box">
+    <%= link_to "Cadastrar guarda", new_guarda_path, class: "btn-action"%>
 </div>
+<table class="guardas-table">
+    <thead>
+        <tr class="tr-head">
+            <th id="guarda-nome">Nome</th>
+            <th id="guarda-mat">Matrícula</th>
+            <th id="guarda-porte">Nº porte de arma</th>
+            <th id="guarda-equipe">Equipe</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @guardas.each do |guarda|%>
+            <tr class="tr-body">
+                <td><%= guarda.nome %></td>
+                <td><%= guarda.matricula %></td>
+                <td><%= guarda.porte_arma %></td>
+                <td><%= guarda.equipe.nome %></td>
+                <td class="table-buttons"> 
+                    <%= link_to "Editar", edit_guarda_path(guarda), class: "btn-list"%>
+                    <%= link_to "Deletar", guarda, data: { turbo_method: "delete", turbo_confirm: "Tem certeza?" },  class: "btn-list"%>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

@@ -1,55 +1,102 @@
 <h1>Movimentacões</h1>
 
 
-<%= link_to "Cadastrar Empréstimo", emprestimo_movimentacaos_path %>
-<%= link_to "Cadastrar Devolução", devolucao_movimentacaos_path %>
 
-<div id="movimentacoes">
-    
-        <table>
-            <thead>
-                <tr>
-                    <th>Armeiro</th>
-                    <th>Nº Mat. do armeiro</th>
-                    <th>Data</th>
-                    <th>Hora</th>
-                    <th>tipo</th>
-                    <th>modelo da arma</th>
-                    <th>Registro da arma</th>
-                    <th>balas</th>
-                    <th>calibre</th>
-                    <th>carregadores</th>
-                    <th>Guarda</th>
-                    <th>Nº de porte de arma</th>
-                    <th>Nº Mat. do guarda</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @movimentacoes.each do|movimentacao| %>
-                    <tr>
-                        <td><%= movimentacao.armeiro.nome %></td>
-                        <td><%= movimentacao.armeiro.matricula %></td>
-                        <td><%= movimentacao.data.strftime("%d/%m/%Y")%></td>
-                        <td><%= movimentacao.hora.strftime("%H:%M")%></td>
-                        <td> 
-                            <% if movimentacao.tipo %>
-                                Empréstimo
-                            <% else %>
-                                Devolução
-                            <% end %>
-                        </td>
-                        <td><%= movimentacao.arma.modelo %></td>
-                        <td><%= movimentacao.arma.registro %></td>
-                        <td><%= movimentacao.balas %></td>
-                        <td><%= movimentacao.calibre %></td>
-                        <td><%= movimentacao.carregadores %></td>
-                        <td><%= movimentacao.guarda.nome %></td>
-                        <td><%= movimentacao.guarda.porte_arma %></td>
-                        <td><%= movimentacao.guarda.matricula %></td>
-                    </tr>
-                    
-                <% end %>
-            </tbody>
-        </table>
-
+<div class="options">
+    <input type="text" name="" id="" placeholder="buscar" class="search-box">
+    <%= link_to "Cadastrar Empréstimo", emprestimo_movimentacaos_path, class: "btn-action" %>
+    <%= link_to "Cadastrar Devolução", devolucao_movimentacaos_path, class: "btn-action" %>
 </div>
+
+    
+<table class="mov-table">
+    <thead>
+        <tr>
+            <th style="width:20%;">Armeiro</th>
+            <th style=";">Arma</th>
+            <th style="width:10%">Munição</th>
+            <th style="width: 30%;">Guarda</th>
+            <th style="">tipo</th>
+            <th style="">Data</th>
+            <th style=""></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @movimentacoes.each do|movimentacao| %>
+            <tr>
+                <td>
+                    <table class="mov-table-table">
+                        <tr>
+                            <th>Nome</th>
+                            <th>NºMat</th>
+                        </tr>
+                        <tr>
+                            <td><%= movimentacao.armeiro.nome %></td>
+                            <td><%= movimentacao.armeiro.porte_arma %></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table class="mov-table-table">
+                        <tr>
+                            <th>Modelo</th>
+                            <th>Registro</th>
+                        </tr>
+                        <tr>
+                            <td><%=movimentacao.arma.modelo%></td>
+                            <td><%= movimentacao.arma.registro %></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table class="mov-table-table">
+                        <tr>
+                            <th>Balas</th>
+                            <th>Calibre</th>
+                            <th>Carregadores</th>
+                        </tr>
+                        <tr>
+                            <td><%= movimentacao.balas %></td>
+                            <td><%= movimentacao.calibre %></td>
+                            <td><%= movimentacao.carregadores %></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table class="mov-table-table">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Nº Mat</th>
+                            <th>Nº porte</th>
+                        </tr>
+                        <tr>
+                            <td><%= movimentacao.guarda.nome %></td>
+                            <td><%= movimentacao.guarda.matricula %></td>
+                            <td><%= movimentacao.guarda.porte_arma %></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <% if movimentacao.tipo%>
+                        Empréstimo
+                    <% else %>
+                        Devolução
+                    <% end %>
+                </td>
+                <td>
+                    <div class="mov-table-data">
+                        <p><%= movimentacao.data.strftime("%d/%m/%Y")%></p>
+                        <p><%= movimentacao.hora.strftime("%H:%M")%></p>
+                    </div>
+                </td>
+                <td class="table-buttons"> 
+                    <%= link_to "Editar", edit_movimentacao_path(movimentacao), class: "btn-list"%>
+                    <%= link_to "Deletar", movimentacao, data: { turbo_method: "delete", turbo_confirm: "Tem certeza?" },  class: "btn-list"%>
+                </td>
+            </tr>
+            
+        <% end %>
+    </tbody>
+</table>
+
+

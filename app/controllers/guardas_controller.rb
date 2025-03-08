@@ -3,6 +3,7 @@ class GuardasController < ApplicationController
 
   def index
     @guardas = Guarda.all
+    @equipes = Equipe.all
   end
 
   def show

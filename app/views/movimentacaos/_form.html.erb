@@ -30,7 +30,7 @@
      <div class="form-field">
         <%= form.label :arma_id, "Arma" %>
         <%= form.collection_select :arma_id, @armas, :id, 
-           ->(arma) { "#{arma.modelo}-#{arma.registro}" }, 
+           ->(arma) { "#{arma.modelo} || #{arma.registro}" }, 
            prompt: "Selecione uma arma" %>
            <%= show_errors(@movimentacao,:arma_id)%>
     </div>
