@@ -1,15 +1,12 @@
 <%= form_with model: @equipe do |form| %>
-  <div>
+  <div class="form">
     <%= form.label :nome %>
     <%= form.text_field :nome %>
-    <%if @equipe.errors[:nome].any?%>
-        <div>
-            <%= @equipe.errors[:nome].join(", ") %>
-        </div>
-    <% end %>
+    <%= show_errors(@equipe,:nome) %>
+    <div>
+      <%= form.submit 'Salvar equipe', class: "form-btn"%>
+    </div>
   </div>
 
-  <div>
-    <%= form.submit 'Salvar equipe'%>
-  </div>
+
 <% end %>

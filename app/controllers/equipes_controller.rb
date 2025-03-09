@@ -29,7 +29,7 @@ class EquipesController < ApplicationController
   def update
     @equipe = Equipe.find(params[:id])
     if @equipe.update(equipe_params)
-      redirect_to @equipe, notice: "Equipe atualizada com sucesso !"
+      redirect_to equipes_path, notice: "Equipe atualizada com sucesso !"
     else
       render :edit, status: :unprocessable_entity
     end

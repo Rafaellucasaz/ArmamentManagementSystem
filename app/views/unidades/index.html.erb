@@ -1,7 +1,7 @@
 <h1>Unidades</h1>
 
 <div class="options">
-    <input type="text" name="" id="" placeholder="Buscar" class="search-box">
+    <input type="text" id="search-box" placeholder="Buscar" class="search-box" oninput="filterList()">
     <%= link_to "Cadastrar unidade", new_unidade_path, class: "btn-action" %>
 </div>
 
@@ -15,9 +15,32 @@
         <div class="list">
             <%= link_to unidade.nome, unidade, class: "list-item" %>
             <div class="list-buttons">
-                <%= link_to "Editar", edit_unidade_path(unidade), class: "btn-list" %>
-                <%= link_to "Deletar", unidade, data: { turbo_method: "delete", turbo_confirm: "Tem certeza?" }, class: "btn-list" %>
+                 <%= link_to edit_unidade_path(unidade)  do %>
+                        <%= image_tag "edit-pen-svgrepo-com.svg", alt: "editar", class: "edit-icon" %>
+                    <% end %>
+                    <%= link_to unidade, data: { turbo_method: "delete", turbo_confirm: "Tem certeza?" } do %>
+                         <%= image_tag "trash-delete-bin-svgrepo-com.svg", alt: "deletar", class: "thrash-icon" %>
+                    <% end %>
             </div>
         </div>
     <% end %>
 </div>
+
+<script>
+  function filterList() {
+    const searchInput = document.getElementById("search-box").value.toLowerCase();
+    const lists = document.querySelectorAll(".list");
+
+    lists.forEach(function(list) {
+      const listItem = list.querySelector(".list-item");
+      const listName = listItem ? listItem.textContent.toLowerCase() : "";
+
+      if (listName.indexOf(searchInput) !== -1) {
+        list.classList.remove("hide");
+      } else {
+        list.classList.add("hide");
+      }
+    });
+  }
+</script>
+

@@ -29,7 +29,7 @@ class UnidadesController < ApplicationController
   def update
     @unidade = Unidade.find(params[:id])
     if @unidade.update(unidade_params)
-      redirect_to @unidade, notice: "Unidade atualizada com sucesso !"
+      redirect_to unidade_path, notice: "Unidade atualizada com sucesso !"
     else
       render :edit, status: :unprocessable_entity
     end

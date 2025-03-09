@@ -24,9 +24,3 @@
   </tbody>
 </table>
 
-<div style="display: flex; flex-direction:column; gap:15px;">
-<%= link_to "Voltar", equipes_path%>
-<%= link_to "Editar", edit_equipe_path(@equipe) %>
-<%= button_to "Deletar", @equipe, method: :delete, data: { turbo_confirm: "tem certeza?" } %>
-
-</div>

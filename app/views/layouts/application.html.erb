@@ -27,12 +27,28 @@
   <body>
     <% if user_signed_in? %>
     <div class= "nav">
-      <%= link_to 'Movimentações', movimentacaos_path, class: "nav-item"%>
-      <%= link_to 'Guardas', guardas_path, class: "nav-item" %>
-      <%= link_to 'Armas', armas_path, class: "nav-item" %>
-      <%= link_to 'Equipes', equipes_path, class: "nav-item"%>
-      <%= link_to 'Unidades', unidades_path, class: "nav-item" %>
-      <%= link_to 'Logout', destroy_user_session_path, data: {turbo_method: "delete"} , class: "nav-item"%>
+      <%= link_to  movimentacaos_path, class: "nav-item" do%>
+        <%= image_tag "transfer-svgrepo-com.svg", alt: "Movimentações", class: "nav-icon" %>
+      <% end %>
+      <%= link_to  guardas_path, class: "nav-item" do %>
+        <%= image_tag "security-guard-svgrepo-com.svg", alt: "Movimentações", class: "nav-icon" %>
+      <% end %>
+      <%= link_to armas_path, class: "nav-item" do %>
+        <%= image_tag "automatic-gun-svgrepo-com.svg", alt: "Movimentações", class: "nav-icon" %>
+      <% end %>
+      <%= link_to equipes_path, class: "nav-item" do%>
+        <%= image_tag "team-svgrepo-com.svg", alt: "Movimentações", class: "nav-icon" %>
+      <% end %>
+      <%= link_to unidades_path, class: "nav-item" do%>
+       <%= image_tag "security-shield-svgrepo-com.svg", alt: "Movimentações", class: "nav-icon" %>
+      <% end %>
+      <%= link_to edit_user_registration_path, class: "nav-item" do %>
+       <%= image_tag "user-icon-svgrepo-com.svg", alt: "Editar Perfil", class: "nav-icon" %>
+      <% end %>
+      <%= link_to  destroy_user_session_path, data: {turbo_method: "delete"} , class: "nav-item" do %>
+        <%= image_tag "log-out-outlined-svgrepo-com.svg", alt: "Editar Perfil", class: "nav-icon" %>
+      <% end %>
+      
     </div>
   <% end %>
 

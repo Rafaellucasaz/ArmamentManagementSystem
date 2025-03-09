@@ -23,10 +23,11 @@
         <%= form.collection_select :equipe_id, @equipes, :id, :nome, prompt: "Selecione uma equipe" %>
         <%= show_errors(@guarda,:equipe_id) %>
     </div>
-    
+
+    <div>
+      <%= form.submit 'Salvar guarda', class: "form-btn"%>
+    </div>
   </div>
 
-  <div>
-    <%= form.submit 'Salvar guarda'%>
-  </div>
+  
 <% end %>

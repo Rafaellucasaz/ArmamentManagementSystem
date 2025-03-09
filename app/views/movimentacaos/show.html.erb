@@ -1,72 +1,96 @@
 <h1>Movimentação Nº <%= @movimentacao.id %></h1>
 
-<div>
-    <div style="display:flex; flex-direction:row; gap:10px">
-        <p>Armeiro:</p>
-        <p><%=@armeiro.nome%></p>
+<div class="mov-info">
+    <div class="section">
+        <p class="section-title">Armeiro</p>
+        <div class="row">
+            <div class="column">
+                <p>Nome</p>
+                <p>Nº Mat.</p>
+            </div>
+            <div class="column">
+                <p><%= @movimentacao.armeiro.nome %></p>
+                <p><%= @movimentacao.armeiro.matricula %></p>
+            </div>
+        </div>
     </div>
-    <div style="display:flex; flex-direction:row; gap:10px">
-        <p>Nº Mat. do Armeiro</p>
-        <p><%=@armeiro.matricula%></p>
+    
+    <div class="section">
+        <p class="section-title">Arma</p>
+        <div class="row">
+            <div class="column">
+                <p>Modelo</p>
+                <p>Registro</p>
+            </div>
+            <div class="column">
+                <p><%= @movimentacao.arma.modelo %></p>
+                <p><%= @movimentacao.arma.registro %></p>
+            </div>
+        </div>
     </div>
-    <div style="display:flex; flex-direction:row; gap:10px">
-        <p>Data:</p>
-        <p><%=@movimentacao.data%></p>
+
+    <div class="section">
+        <p class="section-title">Munição</p>
+        <div class="row">
+            <div class="column">
+                <p>Balas</p>
+                <p>Calibre</p>
+                <p>Carregadores</p>
+            </div>
+            <div class="column">
+                <p><%= @movimentacao.balas %></p>
+                <p><%= @movimentacao.calibre %></p>
+                <p><%= @movimentacao.carregadores %></p>
+            </div>
+        </div>
     </div>
-     <div style="display:flex; flex-direction:row; gap:10px">
-        <p>Hora:</p>
-        <p><%=@movimentacao.hora%></p>
+
+    <div class="section">
+        <p class="section-title">Guarda</p>
+        <div class="row">
+            <div class="column">
+                <p>Nome</p>
+                <p>Nº Mat.</p>
+                <p>Nº porte de arma</p>
+            </div>
+            <div class="column">
+                <p><%= @movimentacao.guarda.nome %></p>
+                <p><%= @movimentacao.guarda.matricula %></p>
+                <p><%= @movimentacao.guarda.porte_arma %></p>
+            </div>
+        </div>
     </div>
-     <div style="display:flex; flex-direction:row; gap:10px">
-        <p>Tipo:</p>
+
+    <div class="section">
+        <p class="section-title">Observações/justificativa</p>
+        <p><%= @movimentacao.observacao %></p>
+    </div>
+
+    <div class="section">
+        <p class="section-title">Data</p>
+        <p><%= @movimentacao.data %></p>
+    </div>
+
+    <div class="section">
+        <p class="section-title">Hora</p>
+        <p><%= @movimentacao.hora %></p>
+    </div>
+
+    <div class="section">
+        <p class="section-title">Tipo</p>
         <p>
-            <% if movimentacao.tipo %>
+            <% if @movimentacao.tipo %>
             Empréstimo
             <% else %>
-                Devolução
+            Devolução
             <% end %>
         </p>
-    </div>
-    <div style="display:flex; flex-direction:row; gap:10px">
-        <p>Modelo da arma:</p>
-        <p><%=@arma.modelo%></p>
-    </div>
-    <div style="display:flex; flex-direction:row; gap:10px">
-        <p>Registro da arma:</p>
-        <p><%=@arma.registro%></p>
-    </div>
-    <div style="display:flex; flex-direction:row; gap:10px">
-        <p>Quantidade de balas:</p>
-        <p><%=@movimentacao.balas%></p>
-    </div>
-    <div style="display:flex; flex-direction:row; gap:10px">
-        <p>Calibre:</p>
-        <p><%=@movimentacao.calibre%></p>
-    </div>
-    <div style="display:flex; flex-direction:row; gap:10px">
-        <p>Carregadores:</p>
-        <p><%=@movimentacao.carregadores%></p>
-    </div>
-    <div style="display:flex; flex-direction:row; gap:10px">
-        <p>Guarda:</p>
-        <p><%=@guarda.nome%></p>
-    </div>
-    <div style="display:flex; flex-direction:row; gap:10px">
-        <p>Nº de porte de arma:</p>
-        <p><%=@guarda.porte_arma%></p>
-    </div>
-    <div style="display:flex; flex-direction:row; gap:10px">
-        <p>Nº Mat. do guarda:</p>
-        <p><%=@guarda.matricula%></p>
-    </div>
-    <div style="display:flex; flex-direction:row; gap:10px">
-        <p>Observações/justificativa:</p>
-        <p><%=@movimentacao.observacao%></p>
     </div>
 </div>
 
 <div style="display: flex; flex-direction:column; gap:15px;">
-<%= link_to "Voltar", movimentacaos_path%>
-<%= button_to "Deletar", @movimentacao, method: :delete, data: { turbo_confirm: "tem certeza?" } %>
+
+
+<%= button_to "Deletar", @movimentacao, method: :delete, data: { turbo_confirm: "tem certeza?" }, class: "form-btn" , style: "margin-top:30px"%>
 
 </div>

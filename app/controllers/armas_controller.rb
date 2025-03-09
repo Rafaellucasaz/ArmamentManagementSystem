@@ -1,13 +1,10 @@
 class ArmasController < ApplicationController
-  before_action :set_arma, only: %i[ show edit update destroy ]
+  before_action :set_arma, only: %i[ edit update destroy ]
 
   def index
     @armas = Arma.all
   end
 
-  def show
-    @arma = Arma.find(params[:id])
-  end
 
   def new
     @arma = Arma.new
@@ -29,7 +26,7 @@ class ArmasController < ApplicationController
   def update
     @arma = Arma.find(params[:id])
     if @arma.update(arma_params)
-      redirect_to @arma, notice: "Arma atualizada com sucesso !"
+      redirect_to armas_path, notice: "Arma atualizada com sucesso !"
     else
       render :edit, status: :unprocessable_entity
     end

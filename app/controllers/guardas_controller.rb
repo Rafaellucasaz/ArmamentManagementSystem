@@ -1,15 +1,11 @@
 class GuardasController < ApplicationController
-  before_action :set_guarda, only: %i[ show edit update destroy ]
+  before_action :set_guarda, only: %i[ edit update destroy ]
 
   def index
     @guardas = Guarda.all
     @equipes = Equipe.all
   end
 
-  def show
-    @guarda = Guarda.find(params[:id])
-    @equipe = Equipe.find(@guarda.equipe_id)
-  end
 
   def new
     @guarda = Guarda.new
@@ -34,13 +30,18 @@ class GuardasController < ApplicationController
   def update
     @guarda = Guarda.find(params[:id])
     if @guarda.update(guarda_params)
-      redirect_to @guarda, notice: "Guarda atualizado com sucesso !"
+      redirect_to guardas_path, notice: "Guarda atualizado com sucesso !"
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
+    @movimentacoes = Movimentacao.where(guarda_id: @guarda.id)
+    if @movimentacoes.count.odd?
+      return redirect_to guardas_path, alert: "Este guarda tem um empréstimo não concluído, primeiro registre a devolução !"
+    end
+
     @guarda.destroy
     redirect_to guardas_path, notice: "Guarda deletado com sucesso !"
   end

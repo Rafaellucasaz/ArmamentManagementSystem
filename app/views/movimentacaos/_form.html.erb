@@ -1,31 +1,43 @@
-
-
-
 <%= form_with model: @movimentacao, url: @movimentacao.tipo ? create_emprestimo_movimentacaos_path 
                                                             : create_devolucao_movimentacaos_path do |form| %>
-  <div class="form">
+  <div class="mov-form">
     
     <%= form.hidden_field :tipo, value: @movimentacao.tipo %>
 
-     <div class="form-field">
-       <%= form.label :armeiro_id, "Armeiro" %>
-       <%= form.collection_select :armeiro_id, @guardas, :id, 
-           ->(guarda) { "#{guarda.nome}-#{guarda.matricula}" }, 
-           prompt: "Selecione um armeiro" %>
-           <%= show_errors(@movimentacao,:armeiro_id)%>
-    </div>
+    <div class="field-group">
+      <div class="form-field">
+        <%= form.label :armeiro_id, "Armeiro" %>
+        <%= form.collection_select :armeiro_id, @guardas, :id, 
+            ->(guarda) { "#{guarda.nome}-#{guarda.matricula}" }, 
+            prompt: "Selecione um armeiro" %>
+            <%= show_errors(@movimentacao,:armeiro_id)%>
+      </div>
 
-    <div class="form-field">
-        <%= form.label :data, "Data" %>
-        <%= form.date_field :data %>
-        <%= show_errors(@movimentacao,:data)%>
-    </div>
+      <div class="form-field">
+      <%= form.label :guarda_id, "Guarda" %>
+        <%= form.collection_select :guarda_id, @guardas, :id, 
+          ->(guarda) { "#{guarda.nome}-#{guarda.matricula}" }, 
+          prompt: "Selecione um guarda" %>
+          <%= show_errors(@movimentacao,:guarda_id)%>
+      </div>
 
-     <div class="form-field">
-        <%= form.label :hora, "Hora" %>
-        <%= form.time_field :hora %>
-        <%= show_errors(@movimentacao,:hora)%>
     </div>
+    
+
+    <div class="field-group">
+      <div class="form-field">
+          <%= form.label :data, "Data" %>
+          <%= form.date_field :data %>
+          <%= show_errors(@movimentacao,:data)%>
+      </div>
+
+      <div class="form-field">
+          <%= form.label :hora, "Hora" %>
+          <%= form.time_field :hora %>
+          <%= show_errors(@movimentacao,:hora)%>
+      </div>
+    </div>
+    
 
      <div class="form-field">
         <%= form.label :arma_id, "Arma" %>
@@ -35,31 +47,28 @@
            <%= show_errors(@movimentacao,:arma_id)%>
     </div>
 
-    <div class="form-field">
-        <%= form.label :balas,"Qtd. de balas"%>
-        <%= form.number_field :balas %>
-        <%= show_errors(@movimentacao,:balas)%>
-    </div>
+    <div class="field-group">
+      <div class="form-field">
+          <%= form.label :balas,"Qtd. de balas"%>
+          <%= form.number_field :balas, style: "width:32%;"%>
+          <%= show_errors(@movimentacao,:balas)%>
+      </div>
 
-    <div class="form-field">
-        <%= form.label :calibre,"Calibre da arma"%>
-        <%= form.text_field :calibre %>
-        <%= show_errors(@movimentacao,:calibre)%>
-    </div>
+      <div class="form-field">
+          <%= form.label :calibre,"Calibre da arma"%>
+          <%= form.text_field :calibre, style: "width:32%;"%>
+          <%= show_errors(@movimentacao,:calibre)%>
+      </div>
 
-    <div class="form-field">
-        <%= form.label :carregadores,"Qtd. de carregadores"%>
-        <%= form.number_field :carregadores %>
-        <%= show_errors(@movimentacao,:carregadores)%>
+      <div class="form-field">
+          <%= form.label :carregadores,"Qtd. de carregadores"%>
+          <%= form.number_field :carregadores, style: "width:32%;"%>
+          <%= show_errors(@movimentacao,:carregadores)%>
+      </div>
     </div>
+   
 
-    <div class="form-field">
-        <%= form.label :guarda_id, "Guarda" %>
-         <%= form.collection_select :guarda_id, @guardas, :id, 
-           ->(guarda) { "#{guarda.nome}-#{guarda.matricula}" }, 
-           prompt: "Selecione um guarda" %>
-           <%= show_errors(@movimentacao,:guarda_id)%>
-    </div>
+  
 
     <% if flash.now[:alert] %>
       <div class="form-field">
@@ -71,6 +80,6 @@
     <% end %>
 
   <div>
-    <%= form.submit 'Salvar Movimentação'%>
+    <%= form.submit 'Salvar Movimentação', class: "form-btn"%>
   </div>
 <% end %>

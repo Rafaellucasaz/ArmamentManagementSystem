@@ -11,9 +11,9 @@ Rails.application.routes.draw do
 
   resources :unidades
 
-  resources :guardas
+  resources :guardas, except: [ :show ]
 
-  resources :armas
+  resources :armas, except: [ :show ]
 
   resources :movimentacaos, except: [ :new, :create ] do
     collection do

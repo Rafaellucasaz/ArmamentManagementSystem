@@ -1,83 +1,35 @@
-<h1>Movimentacões</h1>
-
-
+<h1>Movimentações</h1>
 
 <div class="options">
-    <input type="text" name="" id="" placeholder="buscar" class="search-box">
+    <input type="text" id="search-box" placeholder="Buscar" class="search-box" oninput="filterTable()">
     <%= link_to "Cadastrar Empréstimo", emprestimo_movimentacaos_path, class: "btn-action" %>
     <%= link_to "Cadastrar Devolução", devolucao_movimentacaos_path, class: "btn-action" %>
 </div>
 
-    
 <table class="mov-table">
     <thead>
         <tr>
-            <th style="width:20%;">Armeiro</th>
-            <th style=";">Arma</th>
-            <th style="width:10%">Munição</th>
-            <th style="width: 30%;">Guarda</th>
-            <th style="">tipo</th>
-            <th style="">Data</th>
-            <th style=""></th>
+            <th>Armeiro</th>
+            <th>Arma</th>
+            <th>Balas</th>
+            <th>Calibre</th>
+            <th>Carregadores</th>
+            <th>Guarda</th>
+            <th>Tipo</th>
+            <th>Data</th>
         </tr>
     </thead>
     <tbody>
-        <% @movimentacoes.each do|movimentacao| %>
-            <tr>
+        <% @movimentacoes.each do |movimentacao| %>
+            <tr data-href="<%= movimentacao_path(movimentacao) %>" class="clickable-row">
+                <td><%= movimentacao.armeiro.nome %></td>
+                <td><%= movimentacao.arma.modelo %></td>  
+                <td><%= movimentacao.balas %></td>
+                <td><%= movimentacao.calibre %></td>
+                <td><%= movimentacao.carregadores %></td>  
+                <td><%= movimentacao.guarda.nome %></td> 
                 <td>
-                    <table class="mov-table-table">
-                        <tr>
-                            <th>Nome</th>
-                            <th>NºMat</th>
-                        </tr>
-                        <tr>
-                            <td><%= movimentacao.armeiro.nome %></td>
-                            <td><%= movimentacao.armeiro.porte_arma %></td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <table class="mov-table-table">
-                        <tr>
-                            <th>Modelo</th>
-                            <th>Registro</th>
-                        </tr>
-                        <tr>
-                            <td><%=movimentacao.arma.modelo%></td>
-                            <td><%= movimentacao.arma.registro %></td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <table class="mov-table-table">
-                        <tr>
-                            <th>Balas</th>
-                            <th>Calibre</th>
-                            <th>Carregadores</th>
-                        </tr>
-                        <tr>
-                            <td><%= movimentacao.balas %></td>
-                            <td><%= movimentacao.calibre %></td>
-                            <td><%= movimentacao.carregadores %></td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <table class="mov-table-table">
-                        <tr>
-                            <th>Nome</th>
-                            <th>Nº Mat</th>
-                            <th>Nº porte</th>
-                        </tr>
-                        <tr>
-                            <td><%= movimentacao.guarda.nome %></td>
-                            <td><%= movimentacao.guarda.matricula %></td>
-                            <td><%= movimentacao.guarda.porte_arma %></td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <% if movimentacao.tipo%>
+                    <% if movimentacao.tipo %>
                         Empréstimo
                     <% else %>
                         Devolução
@@ -85,18 +37,50 @@
                 </td>
                 <td>
                     <div class="mov-table-data">
-                        <p><%= movimentacao.data.strftime("%d/%m/%Y")%></p>
-                        <p><%= movimentacao.hora.strftime("%H:%M")%></p>
+                        <p><%= movimentacao.data.strftime("%d/%m/%Y") %></p>
+                        <p><%= movimentacao.hora.strftime("%H:%M") %></p>
                     </div>
                 </td>
-                <td class="table-buttons"> 
-                    <%= link_to "Editar", edit_movimentacao_path(movimentacao), class: "btn-list"%>
-                    <%= link_to "Deletar", movimentacao, data: { turbo_method: "delete", turbo_confirm: "Tem certeza?" },  class: "btn-list"%>
-                </td>
             </tr>
-            
         <% end %>
     </tbody>
 </table>
 
+<script>
+  document.querySelectorAll('.clickable-row').forEach(row => {
+    row.addEventListener('click', function() {
+      window.location = this.getAttribute('data-href');
+    });
+  });
 
+  function filterTable() {
+    const searchInput = document.getElementById("search-box").value.toLowerCase();
+    const rows = document.querySelectorAll(".clickable-row");
+
+    rows.forEach(function(row) {
+      const cells = row.querySelectorAll("td");
+      const armeiro = cells[0].textContent.toLowerCase();
+      const arma = cells[1].textContent.toLowerCase();
+      const balas = cells[2].textContent.toLowerCase();
+      const calibre = cells[3].textContent.toLowerCase();
+      const carregadores = cells[4].textContent.toLowerCase();
+      const guarda = cells[5].textContent.toLowerCase();
+      const tipo = cells[6].textContent.toLowerCase();
+      const data = cells[7].textContent.toLowerCase();
+
+      if (armeiro.includes(searchInput) || arma.includes(searchInput) || balas.includes(searchInput) || 
+          calibre.includes(searchInput) || carregadores.includes(searchInput) || guarda.includes(searchInput) || 
+          tipo.includes(searchInput) || data.includes(searchInput)) {
+        row.classList.remove("hide");
+      } else {
+        row.classList.add("hide");
+      }
+    });
+  }
+</script>
+
+<style>
+  .hide {
+    display: none;
+  }
+</style>

@@ -1,15 +1,14 @@
 <%= form_with model: @unidade do |form| %>
-  <div>
+  <div class="form">
     <%= form.label :nome %>
     <%= form.text_field :nome %>
-    <%if @unidade.errors[:nome].any?%>
-        <div>
-            <%= @unidade.errors[:nome].join(", ") %>
-        </div>
-    <% end %>
+   <%= show_errors(@unidade,:nome) %>
+
+    <div>
+      <%= form.submit 'Salvar unidade', class: "form-btn"%>
+    </div>
+
   </div>
 
-  <div>
-    <%= form.submit 'Salvar unidade'%>
-  </div>
+
 <% end %>

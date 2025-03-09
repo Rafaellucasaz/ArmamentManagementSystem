@@ -9,9 +9,6 @@ class MovimentacaosController < ApplicationController
 
   def show
     @movimentacao = Movimentacao.find(params[:id])
-    @armeiro = Guarda.find(@movimentacao.armeiro_id)
-    @arma = Arma.find(@movimentacao.arma_id)
-    @guarda = Guarda.find(@movimentacao.guarda_id)
   end
 
   def emprestimo
@@ -44,6 +41,12 @@ class MovimentacaosController < ApplicationController
     if @movimentacao.valid?
       # Buscar o último empréstimo da arma
       @emprestimo = Movimentacao.where(arma_id: @movimentacao.arma_id).order(data: :desc, hora: :desc).first
+
+      if @emprestimo.nil?
+        @movimentacao.save
+        update_arma_status(@movimentacao.arma_id)
+        return redirect_to movimentacaos_path, notice: "Devolução registrada com sucesso!"
+      end
       # Verificar se quantidade balas mudou
       if @emprestimo.balas != @movimentacao.balas && @movimentacao.observacao.blank?
         set_armas_guardas(false)
@@ -75,7 +78,7 @@ class MovimentacaosController < ApplicationController
   def update
     @movimentacao = Movimentacao.find(params[:id])
     if @movimentacao.update(movimentacao_params)
-      redirect_to @movimentacao, notice: "Movimentacao atualizada com sucesso !"
+      redirect_to movimentacaos_path, notice: "Movimentacao atualizada com sucesso !"
     else
       render :edit, status: :unprocessable_entity
     end
