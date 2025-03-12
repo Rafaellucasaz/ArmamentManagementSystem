@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  matricula: MyString
+  porte_arma: MyString
+  equipe: one
+
+two:
+  nome: MyString
+  matricula: MyString
+  porte_arma: MyString
+  equipe: two
