@@ -11,7 +11,7 @@ export default function ArmaCard({arma,handleEdit,handleDelete}:ArmaCardProps){
 
     return (
         <div className="flex flex-col col-span-3 rounded-sm p-2  bg-slate-100 ">
-            <div className="hover:bg-blue-200 hover:cursor-pointer rounded-sm">
+            <div className=" rounded-sm">
                 <div className="flex items-center justify-center border-b-2 border-black ">
                     {arma.modelo}
                 </div>

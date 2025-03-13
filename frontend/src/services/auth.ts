@@ -1,4 +1,4 @@
-import { authError, authResponse } from "@/types/User";
+import { authError, authResponse, changePassword } from "@/types/User";
 import fetcher from "./api";
 
 
@@ -30,5 +30,19 @@ export async function sendEmail(email:string){
     method: "POST",
     body: JSON.stringify({email:email, redirect_url:"http://localhost:3001/recuperarSenha/mudarSenha"})
   })
+  return response;
+}
+
+export async function resetPassword(data:changePassword,accessToken:string,uid:string,client:string){
+  const response = await fetcher("/auth/password",{
+    headers: {
+      "access-token":accessToken,
+      "uid":uid,
+      "client":client,
+    },
+    method: "PUT",
+    body: JSON.stringify(data)
+  })
+
   return response;
 }

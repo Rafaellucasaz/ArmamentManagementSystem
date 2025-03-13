@@ -44,6 +44,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen">
+      <h1 className=" mb-10 text-5xl">Login</h1>
       {error && <p className="text-red-400">{error}</p>}
       <div className=" w-3/4 h-2/3 flex flex-row items-center justify-around border-2 border-slate-300">
           <div className="border-2 border-slate-300 rounded-sm">

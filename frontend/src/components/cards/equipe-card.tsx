@@ -10,7 +10,7 @@ export default function EquipeCard({equipe,handleEdit,handleDelete}:EquipeCardPr
 
     return (
         <div className="flex flex-col gap-3 col-span-2 border-b-2 border-black">
-            <div className="flex items-center justify-center hover:bg-blue-200 hover:cursor-pointer rounded-sm text-lg">
+            <div className="flex items-center justify-center  rounded-sm text-lg">
                 {equipe.nome}
             </div>
             <div className="flex flex-row justify-around">

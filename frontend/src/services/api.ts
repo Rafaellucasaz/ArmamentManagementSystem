@@ -1,4 +1,3 @@
-import { getToken } from "./token";
 export interface FetchResponse<T,E> {
     status:number;
     data?: T;

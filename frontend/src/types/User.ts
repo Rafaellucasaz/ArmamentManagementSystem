@@ -29,3 +29,8 @@ export type authError = {
     success:boolean;
     errors:string[];
 }
+
+export type changePassword = {
+    password:string;
+    password_confirmation:string;
+}

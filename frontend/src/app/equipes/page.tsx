@@ -3,6 +3,7 @@
 import EquipeCard from "@/components/cards/equipe-card"
 import EquipeForm from "@/components/forms/equipe-form";
 import Navbar from "@/components/navBar/nav-bar"
+import ProtectedRoute from "@/components/protectedRoute";
 import { equipeService } from "@/services/equipes";
 import { Equipe } from "@/types/Equipe";
 import { useEffect, useState } from "react";
@@ -58,7 +59,8 @@ export default function EquipesPage(){
     }
     
     return(
-        <div className="flex flex-col items-center gap-4">
+        <ProtectedRoute>
+            <div className="flex flex-col items-center gap-4">
             <Navbar/>
             <h1 className="mt-32 text-5xl">Equipes</h1>
             <div className="w-2/5 mt-10 p-2 flex flex-row items-center justify-between border border-slate-400">
@@ -77,5 +79,7 @@ export default function EquipesPage(){
                 
             </div>
         </div>
+        </ProtectedRoute>
+        
     )
 }

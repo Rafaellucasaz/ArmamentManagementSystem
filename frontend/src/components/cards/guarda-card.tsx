@@ -12,7 +12,7 @@ interface GuardaCardProps {
 export default function GuardaCard({guarda,equipe,handleEdit,handleDelete}:GuardaCardProps){
     return (
         <div className="flex flex-col col-span-3 rounded-sm p-2  bg-slate-100 ">
-            <div className="hover:bg-blue-200 hover:cursor-pointer rounded-sm">
+            <div className=" rounded-sm">
                 <div className=" h-10 flex items-center justify-center border-b-2 border-black overflow-hidden">
                     {guarda.nome}
                 </div>
