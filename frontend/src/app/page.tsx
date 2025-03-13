@@ -1,17 +1,16 @@
 "use client"
 import { login } from "@/services/auth";
 import { useState } from "react";
-import { useRouter } from "next/router";
 
 export default function Home() {
-  const router = useRouter();
+
 
   const [formData,setFormData] = useState({
     email: "",
     password: "",
   })
+  
 
-  const [remember, setRemember] = useState<boolean>(false)
   const [error,setError] = useState("");
   const handleForm = (e: React.ChangeEvent<HTMLInputElement>) =>{
     
@@ -27,16 +26,25 @@ export default function Home() {
 
   const handleSubmit = async() => {
     const response = await login(formData.email,formData.password);
-    if(response){
-      router.push("/unidades");
+    if(response.status == 200){
+     
+      if(response.data?.data.first_login){
+        window.location.href = '/usuario';
+      }
+      else{
+        window.location.href = '/movimentacoes';
+      }
     }
     else{
-      setError("erro")
+      setError("Email e/ou senha incorreta")
     }
   }
 
+  
+
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen">
+      {error && <p className="text-red-400">{error}</p>}
       <div className=" w-3/4 h-2/3 flex flex-row items-center justify-around border-2 border-slate-300">
           <div className="border-2 border-slate-300 rounded-sm">
             <img src="guarda_civil.jpeg" alt="Logo da guarda civil" />
@@ -54,7 +62,7 @@ export default function Home() {
                 <button className=" w-full button rounded-sm p-1 " onClick={handleSubmit}>Entrar</button>
             </div>
 
-            <p className=" underline text-blue-500 hover:text-blue-200">Esqueceu a senha?</p>
+            <a  href={"/recuperarSenha"} className=" underline text-blue-500 hover:text-blue-200">Esqueceu a senha?</a>
           </div>
       </div>
     </div>

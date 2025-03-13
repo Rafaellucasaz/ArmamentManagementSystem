@@ -1,29 +1,34 @@
+import { authError, authResponse } from "@/types/User";
 import fetcher from "./api";
 
 
 export async function login(email:string,password:string) {
-    try {
-        
-        const response = await fetcher("/auth/sign_in", {
-          method: "POST",
-          body: JSON.stringify({ email, password }),
-        });
+
+  const response = await fetcher<authResponse,authError>("/auth/sign_in", {
+    method: "POST",
+    body: JSON.stringify({ email, password }),
+  });
+
+
+  const token = response.headers.get("access-token");
+  const client = response.headers.get("client");
+  const uid = response.headers.get("uid");
+
+  if (token && client && uid) {
     
-       
-        const token = response.headers.get("access-token");
-        const client = response.headers.get("client");
-        const uid = response.headers.get("uid");
+    localStorage.setItem("access-token", token);
+    localStorage.setItem("client", client);
+    localStorage.setItem("uid", uid);
+  }
+
+  return response; 
     
-        if (token && client && uid) {
-          
-          localStorage.setItem("access-token", token);
-          localStorage.setItem("client", client);
-          localStorage.setItem("uid", uid);
-        }
-    
-        return response; 
-    } catch (error) {
-        console.error("Erro no login:", error);
-        return null;
-    }
+}
+
+export async function sendEmail(email:string){
+  const response = await fetcher("/auth/password", {
+    method: "POST",
+    body: JSON.stringify({email:email, redirect_url:"http://localhost:3001/recuperarSenha/mudarSenha"})
+  })
+  return response;
 }
